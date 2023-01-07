@@ -1,14 +1,32 @@
 import css from '../Form/Form.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-
 import Notiflix from 'notiflix';
 import { selectContacts } from 'redux/selectors';
 import { Filter } from 'components/Filter/Filter';
 import { addContacts } from 'redux/operations';
+import { useState } from 'react';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const handelChange = evt => {
+    const { name, value } = evt.target;
+
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        Notiflix.Notify.warn('You write something wrong, please try again !!!');
+    }
+  };
 
   const handelSubmit = event => {
     event.preventDefault();
@@ -35,7 +53,8 @@ export const ContactForm = () => {
       dispatch(addContacts({ name: contactName, number: contactNumber }));
       Notiflix.Notify.success(`You added new contact ${contactName}. `);
     }
-
+    setNumber('');
+    setName('');
     form.reset();
   };
 
@@ -50,6 +69,8 @@ export const ContactForm = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             id="name"
+            value={name}
+            onChange={handelChange}
             placeholder="Enter name.."
             required
           />
@@ -60,6 +81,8 @@ export const ContactForm = () => {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             placeholder="Enter number.."
+            value={number}
+            onChange={handelChange}
             id="number"
             required
           />
