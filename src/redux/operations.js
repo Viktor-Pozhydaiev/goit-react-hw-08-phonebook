@@ -38,3 +38,17 @@ export const deleteContacts = createAsyncThunk(
     }
   }
 );
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post('users.signup', credentials);
+      return response.data;
+    } catch (error) {}
+  }
+);
+export const login = createAsyncThunk(
+  'auth/login',
+  async (credentials, thunkAPI) => {}
+);

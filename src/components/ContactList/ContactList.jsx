@@ -1,5 +1,4 @@
 import { Contact } from './Contact';
-import css from '../ContactList/Contact.module.css';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectFilteredContacts } from 'redux/selectors';
@@ -11,12 +10,14 @@ export const ContactList = ({ title }) => {
   return (
     <>
       {reversedContacts.length > 0 && (
-        <ul className={css.contacts_list}>
-          <h2>{title}</h2>
-          {reversedContacts.map(({ id, number, name }) => (
-            <Contact key={id} id={id} name={name} number={number} />
-          ))}
-        </ul>
+        <div>
+          <h2 className="text-xl text-center font-semibold ">{title}</h2>
+          <ul className="flex flex-col  p-0 items-baseline">
+            {reversedContacts.map(({ id, number, name }) => (
+              <Contact key={id} id={id} name={name} number={number} />
+            ))}
+          </ul>
+        </div>
       )}
     </>
   );

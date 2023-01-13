@@ -1,4 +1,3 @@
-import css from '../ContactList/Contact.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Notiflix from 'notiflix';
@@ -13,9 +12,15 @@ export const Contact = ({ id, number, name }) => {
   };
 
   return (
-    <li className={css.contact_item}>
-      {name}: {number}
-      <button className={css.contact_btn} onClick={deleteContact} type="button">
+    <li className="m-1">
+      <span className="p-2 text-center text-xl text-violet-500 ">
+        {name}: {number}
+      </span>
+      <button
+        className="left-10 bg-cyan-500 m-1 "
+        onClick={deleteContact}
+        type="button"
+      >
         Delete
       </button>
     </li>

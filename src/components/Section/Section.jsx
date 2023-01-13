@@ -1,10 +1,9 @@
-import css from '../Section/Section.module.css';
 import PropTypes from 'prop-types';
 
 export const Section = ({ children, title }) => {
   return (
-    <div className={css.section}>
-      <h2>{title}</h2>
+    <div className="flex flex-col items-center">
+      <h2 className="font-bold text-xl p-1">{title}</h2>
       {children}
     </div>
   );

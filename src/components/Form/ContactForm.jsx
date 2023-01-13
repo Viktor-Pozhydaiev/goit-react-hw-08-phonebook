@@ -1,4 +1,3 @@
-import css from '../Form/Form.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { selectContacts } from 'redux/selectors';
@@ -61,9 +60,13 @@ export const ContactForm = () => {
   return (
     <>
       <div>
-        <form className={css.form_wrapper} onSubmit={handelSubmit}>
-          <p className={css.name_form}> Name</p>
+        <form
+          className="flex flex-col p-10 border-2 border-rose-600"
+          onSubmit={handelSubmit}
+        >
+          <p className="text-center"> Name</p>
           <input
+            className="border-2 border-green-600"
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -74,8 +77,9 @@ export const ContactForm = () => {
             placeholder="Enter name.."
             required
           />
-          <p className={css.phone_form}>Phone</p>
+          <p className="text-center">Phone</p>
           <input
+            className="border-2 border-green-600"
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -86,7 +90,7 @@ export const ContactForm = () => {
             id="number"
             required
           />
-          <button className={css.form_btn} type="submit">
+          <button className="bg-green-500 mt-2 text-base " type="submit">
             Add contact
           </button>
         </form>

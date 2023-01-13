@@ -10,9 +10,13 @@ export const Filter = () => {
     dispatch(contactsFilter(filterStr));
   };
   return (
-    <label>
+    <label className="m-2">
       <p>Find contacts by name</p>
-      <input type="text" onChange={handleFilterInput} />
+      <input
+        className="border-2 border-green-700"
+        type="text"
+        onChange={handleFilterInput}
+      />
     </label>
   );
 };
