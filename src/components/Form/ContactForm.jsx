@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
 import { Filter } from 'components/Filter/Filter';
-import { addContacts } from 'redux/operations';
+import { addContacts } from 'redux/contacts/operations';
 import { useState } from 'react';
 
 export const ContactForm = () => {

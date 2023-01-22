@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Notiflix from 'notiflix';
-import { deleteContacts } from 'redux/operations';
+import { deleteContacts } from 'redux/contacts/operations';
 
 export const Contact = ({ id, number, name }) => {
   const dispatch = useDispatch();

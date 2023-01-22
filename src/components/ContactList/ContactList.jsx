@@ -1,7 +1,7 @@
 import { Contact } from './Contact';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { selectFilteredContacts } from 'redux/selectors';
+import { selectFilteredContacts } from 'redux/contacts/selectors';
 
 export const ContactList = ({ title }) => {
   const contacts = useSelector(selectFilteredContacts);
