@@ -5,27 +5,50 @@ import { fetchContacts } from 'redux/contacts/operations';
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from 'pages/HomePage/HomePage';
 import { Layout } from './Layout';
-import { LoginPages } from 'pages/Login/Login';
-import { ContactsPage } from 'pages/Contacts/Contacts';
-import { RegisterPage } from 'pages/Register/Register';
+import { LoginPage } from 'pages/Login/LoginPage';
+import { ContactsPage } from 'pages/Contacts/ContactsPage';
+import { RegisterPage } from 'pages/Register/RegisterPage';
+import { useAuth } from 'hooks';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
+  const { isRefreshing } = useAuth();
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(refreshUse());
+  // }, [dispatch]);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPages />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="contacts" element={<ContactsPage />} />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
         </Route>
       </Routes>
     </>
