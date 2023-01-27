@@ -9,7 +9,7 @@ export const Navigation = () => {
         to="/"
         className="text-indigo-700 font-bold text-xl active:text-indigo-900 hover:text-cyan-500"
       >
-        Home
+        Homepage
       </NavLink>
       {isLoggedIn && (
         <NavLink
