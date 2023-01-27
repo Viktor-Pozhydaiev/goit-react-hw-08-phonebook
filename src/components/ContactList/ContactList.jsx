@@ -5,15 +5,15 @@ import { selectFilteredContacts } from 'redux/contacts/selectors';
 
 export const ContactList = ({ title }) => {
   const contacts = useSelector(selectFilteredContacts);
-  // const reversedContacts = [...contacts].reverse();
+  const reversedContacts = [...contacts].reverse();
 
   return (
     <>
-      {contacts.length > 0 && (
+      {reversedContacts.length > 0 && (
         <div>
           <h2 className="text-xl text-center font-semibold ">{title}</h2>
           <ul className="flex flex-col  p-0 items-baseline">
-            {contacts.map(({ id, number, name }) => (
+            {reversedContacts.map(({ id, number, name }) => (
               <Contact key={id} id={id} name={name} number={number} />
             ))}
           </ul>
