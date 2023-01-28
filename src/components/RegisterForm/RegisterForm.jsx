@@ -1,19 +1,54 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/auth-operations';
+import { useState } from 'react';
+import Notiflix from 'notiflix';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handelChange = e => {
+    e.preventDefault();
+
+    const { name, value } = e.target;
+
+    switch (name) {
+      case 'name':
+        return setName(value);
+      case 'email':
+        return setEmail(value);
+
+      case 'password':
+        return setPassword(value);
+
+      default:
+        return;
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
+    const newName = form.elements.name.value;
+    const newEmail = form.elements.email.value;
+    const newPassword = form.elements.password.value;
+
+    if (name === '' || email === '' || password === '') {
+      Notiflix.Notify.failure('Pleas write your correct  password or email');
+    } else if (name.length < 8 || email.length < 8 || password.length < 8) {
+      Notiflix.Notify.info('Please write validate date');
+    } else {
+      dispatch(
+        register({
+          name: newName,
+          email: newEmail,
+          password: newPassword,
+        })
+      );
+    }
+
     form.reset();
   };
 
@@ -27,6 +62,8 @@ export const RegisterForm = () => {
             type="text"
             name="name"
             placeholder=" Username..."
+            onChange={handelChange}
+            required
           />
         </label>
         <label className="flex flex-col mb-4 text-lg text-teal-600">
@@ -36,6 +73,8 @@ export const RegisterForm = () => {
             type="email"
             name="email"
             placeholder=" Email..."
+            onChange={handelChange}
+            required
           />
         </label>
         <label className="flex flex-col mb-4 text-lg text-teal-600">
@@ -45,6 +84,8 @@ export const RegisterForm = () => {
             type="password"
             name="password"
             placeholder=" Password..."
+            onChange={handelChange}
+            required
           />
         </label>
         <button
