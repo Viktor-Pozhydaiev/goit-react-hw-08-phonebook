@@ -5,8 +5,8 @@ import { logIn } from 'redux/auth/auth-operations';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [setEmail] = useState('');
+  const [setPassword] = useState('');
 
   const handelChange = evt => {
     evt.preventDefault();
