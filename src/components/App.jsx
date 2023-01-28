@@ -56,7 +56,7 @@ export const App = () => {
                 />
               }
             />
-            <Route path="*" element={<RedirectRoute />} />
+            <Route path="*" element={<HomePage />} />
           </Route>
         </Routes>
       )}

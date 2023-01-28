@@ -38,7 +38,7 @@ export const LoginForm = () => {
           />
         </label>
         <button
-          className="border-double border-4 w-20 border-indigo-600 text-base text-sky-800 "
+          className="border-double border-4 w-80 border-indigo-600 text-base text-sky-800 "
           type="submit"
         >
           Log In

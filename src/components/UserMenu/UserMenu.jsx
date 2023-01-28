@@ -7,16 +7,14 @@ export const UserMenu = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="border-6 border-green-500">
+    <div className="border-6 flex flex-row border-green-500">
       <p>Welcome, {user.name}</p>
       <button
         className="bg-indigo-500"
         type="button"
         onClick={() => dispatch(logOut())}
       >
-        <span className="motion-reduce:hidden animate-spin" viewBox="0 0 24 24">
-          Logout
-        </span>
+        <span>Logout</span>
       </button>
     </div>
   );

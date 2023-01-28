@@ -48,7 +48,7 @@ export const RegisterForm = () => {
           />
         </label>
         <button
-          className="border-double rounded-md border-4 w-30 border-indigo-600 text-base text-amber-700"
+          className="border-double rounded-md border-4 w-80 border-indigo-600 text-base text-amber-700"
           type="submit"
         >
           Register

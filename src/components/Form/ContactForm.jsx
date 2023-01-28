@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { selectContacts } from 'redux/contacts/selectors';
-import { Filter } from 'components/Filter/Filter';
 import { addContacts } from 'redux/contacts/operations';
 import { useState } from 'react';
 
@@ -23,7 +22,7 @@ export const ContactForm = () => {
         break;
 
       default:
-        Notiflix.Notify.warn('You write something wrong, please try again !!!');
+        Notiflix.Notify.warning('You wrote something wrong, please try again!');
     }
   };
 
@@ -52,11 +51,10 @@ export const ContactForm = () => {
       dispatch(addContacts({ name: contactName, number: contactNumber }));
       Notiflix.Notify.success(`You added new contact ${contactName}. `);
     }
-    setNumber('');
     setName('');
+    setNumber('');
     form.reset();
   };
-
   return (
     <>
       <div>
@@ -95,7 +93,6 @@ export const ContactForm = () => {
           </button>
         </form>
       </div>
-      {contacts.length > 0 && <Filter />}
     </>
   );
 };

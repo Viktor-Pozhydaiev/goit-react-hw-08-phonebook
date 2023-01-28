@@ -6,7 +6,7 @@ import { Navigation } from '../Navigation/Navigation';
 export const AppBar = () => {
   const { isLoggedIn } = useAuth();
   return (
-    <header>
+    <header className="flex justify-between items-center bg-slate-500 mb-8">
       <Navigation />
       {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </header>
