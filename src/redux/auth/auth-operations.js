@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import Notiflix from 'notiflix';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -24,7 +24,7 @@ export const register = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response.status === 400) {
-        toast.error(
+        Notiflix.Notify.warning(
           'Something went wrong, pleas check your login, email or password and try again!'
         );
         return thunkAPI.rejectWithValue(error.message);
@@ -43,7 +43,7 @@ export const logIn = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response.status === 400) {
-        toast.error(
+        Notiflix.Notify.warning(
           'Something went wrong, pleas write your correct information'
         );
         return thunkAPI.rejectWithValue(error.message);
