@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/auth-operations';
 import { useState } from 'react';
-import Notiflix from 'notiflix';
+import { toast } from 'react-hot-toast';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -30,15 +30,13 @@ export const RegisterForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const form = e.currentTarget;
 
     if (name === '' || email === '' || password === '') {
-      Notiflix.Notify.failure('Pleas write your correct  password or email');
-      form.reset();
+      toast.error('Pleas write your correct  password or email');
+
       return;
     } else if (name.length < 8 || email.length < 8 || password.length < 8) {
-      Notiflix.Notify.info('Please write validate date');
-      form.reset();
+      toast.error('Please write validate date');
     } else {
       dispatch(
         register({
@@ -48,10 +46,6 @@ export const RegisterForm = () => {
         })
       );
     }
-    setName('');
-    setPassword('');
-    setEmail('');
-    form.reset();
   };
 
   return (

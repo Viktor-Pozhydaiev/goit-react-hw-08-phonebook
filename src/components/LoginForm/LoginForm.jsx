@@ -1,5 +1,5 @@
-import Notiflix from 'notiflix';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/auth-operations';
 
@@ -24,12 +24,9 @@ export const LoginForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const form = e.currentTarget;
-
     if (email === '' || password === '') {
-      Notiflix.Notify.warning('Please write your correct information!');
+      toast.error('Please write your correct information!');
 
-      form.reset();
       return;
     } else {
       dispatch(
@@ -39,9 +36,6 @@ export const LoginForm = () => {
         })
       );
     }
-    setEmail('');
-    setPassword('');
-    form.reset();
   };
   return (
     <div className="m-5">

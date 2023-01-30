@@ -3,6 +3,7 @@ import Notiflix from 'notiflix';
 import { selectContacts } from 'redux/contacts/selectors';
 import { addContacts } from 'redux/contacts/operations';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -29,31 +30,20 @@ export const ContactForm = () => {
   const handelSubmit = event => {
     event.preventDefault();
 
-    const { name, number } = event.target;
-
-    const form = event.target;
-    const contactName = name.value;
-    const contactNumber = number.value;
     if (
       contacts.find(
-        contact => contact.name.toLowerCase() === contactName.toLowerCase()
+        contact => contact.name.toLowerCase() === name.toLowerCase()
       )
     ) {
-      Notiflix.Notify.failure(`${contactName} is already  in contacts.`);
-      form.reset();
-      return;
-    } else if (contacts.find(contact => contact.number === contactNumber)) {
-      Notiflix.Notify.failure(
-        `Contact number ${contactNumber} is already  in contacts.`
-      );
-      form.reset();
+      toast.error(`${name} is already  in contacts.`);
+    } else if (contacts.find(contact => contact.number === number)) {
+      toast.error(`Contact number ${number} is already  in contacts.`);
     } else {
-      dispatch(addContacts({ name: contactName, number: contactNumber }));
-      Notiflix.Notify.success(`You added new contact ${contactName}. `);
+      dispatch(addContacts({ name: name, number: number }));
+      toast.success(`You added new contact ${name}. `);
     }
     setName('');
     setNumber('');
-    form.reset();
   };
   return (
     <>
