@@ -34,8 +34,8 @@ export const LoginForm = () => {
     } else {
       dispatch(
         logIn({
-          email: form.elements.email.value,
-          password: form.elements.password.value,
+          email: email,
+          password: password,
         })
       );
     }

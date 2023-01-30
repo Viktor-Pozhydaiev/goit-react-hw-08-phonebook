@@ -42,9 +42,9 @@ export const RegisterForm = () => {
     } else {
       dispatch(
         register({
-          name: form.elements.name.value,
-          email: form.elements.email.value,
-          password: form.elements.password.value,
+          name: name,
+          email: email,
+          password: password,
         })
       );
     }
