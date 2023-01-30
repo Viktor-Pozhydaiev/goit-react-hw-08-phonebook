@@ -5,14 +5,11 @@ import { logIn } from 'redux/auth/auth-operations';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const [setEmail] = useState('');
-  const [setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handelChange = evt => {
-    evt.preventDefault();
-    const { email, value } = evt.target;
-
-    switch (email) {
+  const handelChange = ({ target: { name, value } }) => {
+    switch (name) {
       case 'email':
         return setEmail(value);
 
@@ -28,20 +25,22 @@ export const LoginForm = () => {
     e.preventDefault();
 
     const form = e.currentTarget;
-    const newEmail = form.elements.email.value;
-    const newPassword = form.elements.password.value;
 
-    if (newEmail.length > 8 || newPassword.length > 8) {
+    if (email === '' || password === '') {
+      Notiflix.Notify.warning('Please write your correct information!');
+
+      form.reset();
+      return;
+    } else {
       dispatch(
         logIn({
-          email: newEmail,
-          password: newPassword,
+          email: form.elements.email.value,
+          password: form.elements.password.value,
         })
       );
-    } else {
-      Notiflix.Notify.warning('Please write your correct information!');
     }
-
+    setEmail('');
+    setPassword('');
     form.reset();
   };
   return (
@@ -54,6 +53,7 @@ export const LoginForm = () => {
             type="email"
             name="email"
             id="email"
+            value={email}
             onChange={handelChange}
             placeholder="Email..."
             required
@@ -66,6 +66,7 @@ export const LoginForm = () => {
             type="password"
             name="password"
             id="password"
+            value={password}
             onChange={handelChange}
             placeholder="Password..."
             required

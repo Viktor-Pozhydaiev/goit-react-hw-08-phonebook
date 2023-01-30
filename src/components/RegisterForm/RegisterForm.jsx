@@ -31,24 +31,26 @@ export const RegisterForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const newName = form.elements.name.value;
-    const newEmail = form.elements.email.value;
-    const newPassword = form.elements.password.value;
 
     if (name === '' || email === '' || password === '') {
       Notiflix.Notify.failure('Pleas write your correct  password or email');
+      form.reset();
+      return;
     } else if (name.length < 8 || email.length < 8 || password.length < 8) {
       Notiflix.Notify.info('Please write validate date');
+      form.reset();
     } else {
       dispatch(
         register({
-          name: newName,
-          email: newEmail,
-          password: newPassword,
+          name: form.elements.name.value,
+          email: form.elements.email.value,
+          password: form.elements.password.value,
         })
       );
     }
-
+    setName('');
+    setPassword('');
+    setEmail('');
     form.reset();
   };
 
@@ -61,6 +63,7 @@ export const RegisterForm = () => {
             className="focus:outline-none focus:border-cyan-600-500 focus:ring-cyan-500 focus:ring-1 border-solid border-2 rounded-lg border-indigo-600 hover:border-dotted"
             type="text"
             name="name"
+            value={name}
             placeholder=" Username..."
             onChange={handelChange}
             required
@@ -72,6 +75,7 @@ export const RegisterForm = () => {
             className="focus:outline-none focus:border-cyan-600-500 focus:ring-cyan-500 focus:ring-1 border-solid border-2 rounded-lg border-indigo-600 hover:border-dotted"
             type="email"
             name="email"
+            value={email}
             placeholder=" Email..."
             onChange={handelChange}
             required
@@ -83,6 +87,7 @@ export const RegisterForm = () => {
             className="focus:outline-none focus:border-cyan-600-500 focus:ring-cyan-500 focus:ring-1 border-solid border-2 rounded-lg border-indigo-600 hover:border-dotted"
             type="password"
             name="password"
+            value={password}
             placeholder=" Password..."
             onChange={handelChange}
             required
